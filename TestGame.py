@@ -519,7 +519,9 @@ class TestGame:
 
 
 
-        #####################################################################    
+        #####################################################################  
+        pygame.init()
+        pygame.display.set_mode((0, 0), pygame.RESIZABLE)  
         screen = pygame.display.get_surface()       
         while True:
                               while Gtk.events_pending():

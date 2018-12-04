@@ -23,8 +23,6 @@ class TestActivity(sugar3.activity.activity.Activity):
 
         self.paused = False
 
-        
-
         # Build the activity toolbar.
         self.build_toolbar()
 
@@ -32,16 +30,16 @@ class TestActivity(sugar3.activity.activity.Activity):
         self.game = TestGame.TestGame()
 
         # Build the Pygame canvas.
-        self._pygamecanvas = sugargame.canvas.PygameCanvas(self)
+
+        self._pygamecanvas = sugargame.canvas.PygameCanvas(self,
+            main=self.game.run,
+            modules=[pygame.display])
 
         # Note that set_canvas implicitly calls read_file when
         # resuming from the Journal.
         self.set_canvas(self._pygamecanvas)
         self._pygamecanvas.grab_focus()
 
-        # Start the game running (self.game.run is called when the
-        # activity constructor returns).
-        self._pygamecanvas.run_pygame(self.game.run)
 
     def build_toolbar(self):
         toolbar_box = ToolbarBox()
@@ -71,3 +69,6 @@ class TestActivity(sugar3.activity.activity.Activity):
 
     def write_file(self, file_path):
         self.game.write_file(file_path)
+    
+    def get_preview(self):
+        return self._pygamecanvas.get_preview()
