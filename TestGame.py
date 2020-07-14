@@ -264,6 +264,7 @@ class TestGame:
 
         def message_to_screen(msg, color, y_displace=100, size = "small"):
                             screen = pygame.display.get_surface()
+                            scale = screen.get_height() / 900
                             brick_w   = round((screen.get_width())/10.7)
                             brick_h   = round((screen.get_height())/32)
                             scroller_w  = round((screen.get_width())/10.7)
@@ -275,7 +276,7 @@ class TestGame:
                             y_max_ball   = (screen.get_height() - 10) - b_diameter
 
                             textSur, textRect = text_size( msg, color, size)
-                            textRect.center = ((screen.get_width())/2), ((screen.get_height() - 50)/2) + y_displace
+                            textRect.center = ((screen.get_width())/2), ((screen.get_height() - 50)/2) + y_displace * scale
                             screen.blit(textSur, textRect)
         def unpause():
                 global pause
