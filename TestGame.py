@@ -62,7 +62,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -91,7 +91,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -112,7 +112,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -127,7 +127,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -167,7 +167,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -196,7 +196,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -228,7 +228,7 @@ class TestGame:
                 scroller_w  = round((screen.get_width())/10.7)
                 scroller_h  = round((screen.get_height())/40)
                 b_diameter = round((scroller_w)/3.75)
-                x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+                x_max_scrol = screen.get_width() - scroller_w
                 y_scrol = (screen.get_height() -10) - scroller_h-70
                 x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
                 y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -245,7 +245,7 @@ class TestGame:
                             scroller_w  = round((screen.get_width())/10.7)
                             scroller_h  = round((screen.get_height())/40)
                             b_diameter = round((scroller_w)/3.75)
-                            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+                            x_max_scrol = screen.get_width() - scroller_w
                             y_scrol = (screen.get_height() -10) - scroller_h-70
                             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
                             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -269,7 +269,7 @@ class TestGame:
                             scroller_w  = round((screen.get_width())/10.7)
                             scroller_h  = round((screen.get_height())/40)
                             b_diameter = round((scroller_w)/3.75)
-                            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+                            x_max_scrol = screen.get_width() - scroller_w
                             y_scrol = (screen.get_height() - 10) - scroller_h-70
                             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
                             y_max_ball   = (screen.get_height() - 10) - b_diameter
@@ -320,7 +320,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
@@ -474,7 +474,7 @@ class TestGame:
             scroller_w  = round((screen.get_width())/10.7)
             scroller_h  = round((screen.get_height())/40)
             b_diameter = round((scroller_w)/3.75)
-            x_max_scrol = (screen.get_width() - sx(10)) - scroller_w
+            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() -10) - scroller_h-70
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
