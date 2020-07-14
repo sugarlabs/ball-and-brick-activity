@@ -99,7 +99,7 @@ class TestGame:
             brick_start_pos_y = 70
             self.bricks_arr = [ ]
             for i in range(7):
-                brick_start_pos_x = (screen.get_width() - sx(10))/7.5
+                brick_start_pos_x = (screen.get_width() - (brick_w + sx(10)) * 8) / 2
                 for j in range(8):
                     self.bricks_arr.append(pygame.Rect(brick_start_pos_x,brick_start_pos_y,brick_w,brick_h))
                     brick_start_pos_x += brick_w + sx(10)
