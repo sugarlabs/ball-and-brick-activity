@@ -275,7 +275,7 @@ class TestGame:
                             y_max_ball   = (screen.get_height() - 10) - b_diameter
 
                             textSur, textRect = text_size( msg, color, size)
-                            textRect.center = ((screen.get_width() - sx(50))/2), ((screen.get_height() - 50)/2) + y_displace
+                            textRect.center = ((screen.get_width())/2), ((screen.get_height() - 50)/2) + y_displace
                             screen.blit(textSur, textRect)
         def unpause():
                 global pause
