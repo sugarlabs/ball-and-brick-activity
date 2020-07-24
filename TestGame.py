@@ -136,12 +136,12 @@ class TestGame:
             keys = pygame.key.get_pressed()
             
             if keys[pygame.K_LEFT]:
-                self.paddle.left -= 10
+                self.paddle.left -= 12
                 if self.paddle.left < 0:
                     self.paddle.left = 0
 
             if keys[pygame.K_RIGHT]:
-                self.paddle.left += 10
+                self.paddle.left += 12
                 if self.paddle.left > x_max_scrol:
                     self.paddle.left = x_max_scrol
 
