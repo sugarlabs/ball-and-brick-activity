@@ -529,7 +529,21 @@ class TestGame:
         #####################################################################  
         pygame.init()
         pygame.display.set_mode((0, 0), pygame.RESIZABLE)  
-        screen = pygame.display.get_surface()       
+        screen = pygame.display.get_surface()
+
+        def draw_welcome():
+            screen.fill(self.yellow)
+            message_to_screen("Welcome to Ball and Brick",
+                              [0,0,0], 0, size = "large")
+            message_to_screen("Press C to start the game",
+                              self.green, 100, size = "medium")
+            message_to_screen("Press S for setting the theme",
+                              self.green, 170, size = "medium")
+            message_to_screen("Press Q to quit the game",
+                              self.red, 240, size = "medium") 
+            pygame.display.flip()    
+            self.clock.tick(10)
+        draw_welcome()
         while True:
                               while Gtk.events_pending():
                                       Gtk.main_iteration()
@@ -548,14 +562,7 @@ class TestGame:
                                           elif event.key == pygame.K_q:
                                                 pygame.quit()
                                                 quit()
-                                            
-                              screen.fill(self.yellow)
-                              message_to_screen( "Welcome to Ball and Brick", [0,0,0], 0, size = "large")
-                              message_to_screen( "Press C to start the game", self.green, 100, size = "medium")
-                              message_to_screen( "Press S for setting the theme", self.green, 170, size = "medium")
-                              message_to_screen( "Press Q to quit the game", self.red, 240, size = "medium") 
-                              pygame.display.update()    
-                              self.clock.tick(15)
+                              self.clock.tick(10)
 
 
 def main():
