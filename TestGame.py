@@ -35,9 +35,9 @@ class TestGame:
         self.white = (255,255,255)
         self.blue  = (0,0,255)
         self.black = (0,0,0)
-        self.back_col = [(255, 255, 255)] 
-        self.brick_colour =[(0,0,0)]
-        self.scroll_col = [(0,0,0)]
+        self.back_col = (255, 255, 255)
+        self.brick_col = (0,0,0)
+        self.scroll_col = (0,0,0)
         self.ball_still = 0
         self.ball_play = 1
         self.ball_won = 2
@@ -46,6 +46,50 @@ class TestGame:
         self.pause = False
         self.shake = 0
         self.ball_vel = pygame.Vector2(7, -7)
+        self.theme_keys = (
+            pygame.K_1,
+            pygame.K_2,
+            pygame.K_3,
+            pygame.K_4,
+            pygame.K_5,
+            pygame.K_6,
+            pygame.K_7,
+            pygame.K_8,
+            pygame.K_9,
+        )
+        self.back_cols = (
+            (255, 255, 255),
+            (228, 47, 12),
+            (47, 79, 79),
+            (140, 89, 51),
+            (0, 255, 255),
+            (115, 69, 35),
+            (6, 43, 22),
+            (25, 25, 112),
+            (9, 84, 190),
+        )
+        self.brick_cols = (
+            (0, 0, 0),
+            (245, 226, 226),
+            (255, 255, 255),
+            (237, 201, 175),
+            (34, 139, 34),
+            (0, 255, 0),
+            (173, 255, 47),
+            (255, 255, 49),
+            (212, 219, 178),
+        )
+        self.scroll_cols = (
+            (0, 0, 0),
+            (0, 255, 0),
+            (255, 255, 255),
+            (237, 201, 175),
+            (34, 139, 34),
+            (0, 255, 0),
+            (173, 255, 47),
+            (255, 255, 49),
+            (212, 219, 178),
+        )
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
         pass
@@ -125,7 +169,7 @@ class TestGame:
                 rand = 0, 0
 
             for brick in self.bricks_arr:
-                pygame.draw.rect(screen, self.brick_colour[0], (brick.x + rand[0], brick.y + rand[1], brick.width, brick.height))
+                pygame.draw.rect(screen, self.brick_col, (brick.x + rand[0], brick.y + rand[1], brick.width, brick.height))
             
         def check_input():
             screen = pygame.display.get_surface()
@@ -249,8 +293,6 @@ class TestGame:
                 y_scrol = (screen.get_height() -10) - scroller_h-70
                 x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
                 y_max_ball   = (screen.get_height() -10) - b_diameter
-
-
                 medfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(30)))
                 font_surface = medfont.render("Score: " + str(self.score), True, self.brick_col)
                 live_surface = medfont.render("Lives left: " + str(self.lives),  True, self.brick_col)
@@ -258,6 +300,7 @@ class TestGame:
                 screen.blit(live_surface, (round(screen.get_width()/2 - live_surface.get_width()/2) ,5))
                 pause_mess = medfont.render("Press P to pause", True, self.brick_col)
                 screen.blit(pause_mess, (round(screen.get_width() - pause_mess.get_width() - sx(100)), 5))
+
         def text_size(text, color, size):
                             screen = pygame.display.get_surface()
                             brick_w   = round((screen.get_width())/10.7)
@@ -304,11 +347,11 @@ class TestGame:
                 self.pause = False
         def paused():
                 screen = pygame.display.get_surface()
-                screen.fill(self.back_col[0])
-                message_to_screen( "Paused", self.brick_colour[0], 0, size = "large")
-                message_to_screen ( "Press P to continue", self.brick_colour[0], 100, size = "medium")
-                message_to_screen( "Press N for a new game", self.brick_colour[0], 170, size = "medium")
-                message_to_screen( "Press Q to quit", self.brick_colour[0], 240, size = "medium")
+                screen.fill(self.back_col)
+                message_to_screen( "Paused", self.brick_col, 0, size = "large")
+                message_to_screen ( "Press P to continue", self.brick_col, 100, size = "medium")
+                message_to_screen( "Press N for a new game", self.brick_col, 170, size = "medium")
+                message_to_screen( "Press Q to quit", self.brick_col, 240, size = "medium")
                 pygame.mixer.music.pause()
                 pygame.display.update()
                 
@@ -377,111 +420,14 @@ class TestGame:
                                         elif event.key == pygame.K_q:
                                             pygame.quit()
                                             quit()
-                                        elif event.key == pygame.K_1:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.back_col.append((255, 255, 255)) 
-                                            self.brick_colour.append((0,0,0))
-                                            self.scroll_col.append((0,0,0))
-                                            gameLoop()
-                                        elif event.key == pygame.K_2:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.back_col.append((228,47,12)) 
-                                            self.brick_colour.append((245, 226, 226))
-                                            self.scroll_col.append((0,255,0))
-                                            gameLoop()
-                                        elif event.key == pygame.K_3:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (255,255,255) )
-                                            self.back_col.append( (47,79,79) )
-                                            self.scroll_col.append((255,255,255) )
-                                            gameLoop()
-                                        elif event.key == pygame.K_4:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (237, 201, 175) )
-                                            self.back_col.append( (140, 89, 51) )
-                                            self.scroll_col.append((237, 201, 175) )
-                                            gameLoop()
-
-                                        elif event.key == pygame.K_5:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (34,139,34) )
-                                            self.back_col.append( (0,255,255) )
-                                            self.scroll_col.append((34,139,34) )
-                                            gameLoop()
-
-                                        elif event.key == pygame.K_6:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (0,255,0) )
-                                            self.back_col.append((115,69,35) )
-                                            self.scroll_col.append((0,255,0) )
-                                            gameLoop()
-
-
-                                        elif event.key == pygame.K_7:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (173,255,47) )
-                                            self.back_col.append(( 6, 43, 22) )
-                                            self.scroll_col.append((173,255,47) )
-                                            gameLoop()
-
-                                        elif event.key == pygame.K_8:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (255, 255, 49) )
-                                            self.back_col.append(( 25, 25, 112) )
-                                            self.scroll_col.append((255, 255, 49) )
-                                            gameLoop()
-
-                                        elif event.key == pygame.K_9:
-                                            if self.back_col:
-                                                self.back_col.remove(self.back_col[0])
-                                            if self.brick_colour:
-                                                self.brick_colour.remove(self.brick_colour[0])
-                                            if self.scroll_col:
-                                                self.scroll_col.remove(self.scroll_col[0])
-                                            self.brick_colour.append( (212, 219, 178) )
-                                            self.back_col.append(( 9, 84, 190) )
-                                            self.scroll_col.append((212, 219, 178) )
-                                            gameLoop()
+                                        else:
+                                            for i, key in enumerate(self.theme_keys):
+                                                if event.key == key:
+                                                    self.back_col = self.back_cols[i]
+                                                    self.brick_col = self.brick_cols[i]
+                                                    self.scroll_col = self.scroll_cols[i]
+                                                    gameLoop()
+                                                    break
 
                                             
                                             
@@ -514,11 +460,11 @@ class TestGame:
                             paused()
 
                 self.clock.tick(50)
-                screen.fill(self.back_col[0])
+                screen.fill(self.back_col)
                 check_input()
                 draw_bricks()
-                pygame.draw.rect(screen, self.scroll_col[0], self.paddle)
-                pygame.draw.circle(screen, self.scroll_col[0], (self.ball.left + int(b_diameter/2), self.ball.top + int(b_diameter/2)), int(b_diameter/2))
+                pygame.draw.rect(screen, self.scroll_col, self.paddle)
+                pygame.draw.circle(screen, self.scroll_col, (self.ball.left + int(b_diameter/2), self.ball.top + int(b_diameter/2)), int(b_diameter/2))
                 score_lives()
                 if self.state == self.ball_play:
                     move_ball()
@@ -526,18 +472,18 @@ class TestGame:
                 elif self.state == self.ball_still:
                     self.ball.left = self.paddle.left + self.paddle.width / 2
                     self.ball.top  = self.paddle.top - self.ball.height
-                    message_to_screen( "Press C to play", self.brick_colour[0], 0, size = "large")
+                    message_to_screen( "Press C to play", self.brick_col, 0, size = "large")
                 elif self.state == self.ball_game_over:
-                    message_to_screen( "Game Over", self.brick_colour[0], 50, size = "large")
-                    message_to_screen( "Press N for New Game", self.brick_colour[0], 150, size = "medium")
-                    message_to_screen( "Press S for setting the theme", self.brick_colour[0], 220, size = "medium")
-                    message_to_screen( "Press Q to quit", self.brick_colour[0], 290, size = "medium")
+                    message_to_screen( "Game Over", self.brick_col, 50, size = "large")
+                    message_to_screen( "Press N for New Game", self.brick_col, 150, size = "medium")
+                    message_to_screen( "Press S for setting the theme", self.brick_col, 220, size = "medium")
+                    message_to_screen( "Press Q to quit", self.brick_col, 290, size = "medium")
                     pygame.mixer.music.stop()
                 elif self.state == self.ball_won:
-                    message_to_screen( "You Won", self.brick_colour[0], 50, size = "large")
-                    message_to_screen( "Press N for New Game", self.brick_colour[0], 150, size = "medium")
-                    message_to_screen( "Press S for setting the theme", self.brick_colour[0], 220, size = "medium")
-                    message_to_screen( "Press Q to quit", self.brick_colour[0], 290, size = "medium")
+                    message_to_screen( "You Won", self.brick_col, 50, size = "large")
+                    message_to_screen( "Press N for New Game", self.brick_col, 150, size = "medium")
+                    message_to_screen( "Press S for setting the theme", self.brick_col, 220, size = "medium")
+                    message_to_screen( "Press Q to quit", self.brick_col, 290, size = "medium")
                     pygame.mixer.music.stop()
 
                 
