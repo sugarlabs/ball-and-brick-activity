@@ -233,11 +233,14 @@ class TestGame:
                 x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
                 y_max_ball   = (screen.get_height() -10) - b_diameter
 
-                medfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(40)))
-                font_surface = medfont.render("Score: " + str(self.score) + "         Lives left: " + str(self.lives), False, self.brick_colour[0])
+
+                medfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(30)))
+                font_surface = medfont.render("Score: " + str(self.score), True, self.brick_col)
+                live_surface = medfont.render("Lives left: " + str(self.lives),  True, self.brick_col)
                 screen.blit(font_surface, (sx(100),5))
-                pause_mess = medfont.render("Press P to pause", False, self.brick_colour[0])
-                screen.blit(pause_mess, (sx(800), 5))
+                screen.blit(live_surface, (round(screen.get_width()/2 - live_surface.get_width()/2) ,5))
+                pause_mess = medfont.render("Press P to pause", True, self.brick_col)
+                screen.blit(pause_mess, (round(screen.get_width() - pause_mess.get_width() - sx(100)), 5))
         def text_size(text, color, size):
                             screen = pygame.display.get_surface()
                             brick_w   = round((screen.get_width())/10.7)
@@ -534,13 +537,13 @@ class TestGame:
         def draw_welcome():
             screen.fill(self.yellow)
             message_to_screen("Welcome to Ball and Brick",
-                              [0,0,0], 0, size = "large")
+                              [0,0,0], -100, size = "large")
             message_to_screen("Press C to start the game",
-                              self.green, 100, size = "medium")
+                              self.green, 0, size = "medium")
             message_to_screen("Press S for setting the theme",
-                              self.green, 170, size = "medium")
+                              self.green, 70, size = "medium")
             message_to_screen("Press Q to quit the game",
-                              self.red, 240, size = "medium") 
+                              self.red, 140, size = "medium") 
             pygame.display.flip()    
             self.clock.tick(10)
         draw_welcome()
