@@ -211,9 +211,16 @@ class TestGame:
             for brick in self.bricks_arr:
                 if self.ball.colliderect(brick):
                     self.score += 3
-                    self.ball_vel[1] = -self.ball_vel[1]
                     self.bricks_arr.remove(brick)
                     self.shake = pygame.time.get_ticks() + 200
+                    dr = abs(self.ball.right - brick.left)
+                    dl = abs(self.ball.left - brick.right)
+                    db = abs(self.ball.bottom - brick.top)
+                    dt = abs(self.ball.top - brick.bottom)
+                    if min(dl, dr) < min(dt, db):
+                        self.ball_vel[0] = -self.ball_vel[0]
+                    else:
+                        self.ball_vel[1] = -self.ball_vel[1]
                     break
 
             if len(self.bricks_arr) == 0:
