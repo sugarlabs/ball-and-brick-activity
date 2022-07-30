@@ -18,6 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from random import random
 import sys
 import pygame
 import gi
@@ -44,6 +45,7 @@ class TestGame:
         self.clock = pygame.time.Clock()
         self.pause = False
         self.ball_vel = [7,-7]
+        self.shake = 0
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
         pass
@@ -117,8 +119,13 @@ class TestGame:
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
 
+            if self.shake > pygame.time.get_ticks():
+                rand = (random() - 0.5) * 6, (random() - 0.5) * 6
+            else:
+                rand = 0, 0
+
             for brick in self.bricks_arr:
-                pygame.draw.rect(screen, self.brick_colour[0], brick)
+                pygame.draw.rect(screen, self.brick_colour[0], (brick.x + rand[0], brick.y + rand[1], brick.width, brick.height))
             
         def check_input():
             screen = pygame.display.get_surface()
@@ -206,6 +213,7 @@ class TestGame:
                     self.score += 3
                     self.ball_vel[1] = -self.ball_vel[1]
                     self.bricks_arr.remove(brick)
+                    self.shake = pygame.time.get_ticks() + 200
                     break
 
             if len(self.bricks_arr) == 0:
