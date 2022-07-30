@@ -44,8 +44,8 @@ class TestGame:
         self.ball_game_over = 3
         self.clock = pygame.time.Clock()
         self.pause = False
-        self.ball_vel = [7,-7]
         self.shake = 0
+        self.ball_vel = pygame.Vector2(7, -7)
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
         pass
@@ -154,11 +154,11 @@ class TestGame:
 
             if keys[pygame.K_c] and self.state == self.ball_still:
                 if self.score > 150:
-                    self.ball_vel = [10,-10]
+                    self.ball_vel = pygame.Vector2(10, -10)
                 elif self.score > 100:
-                    self.ball_vel = [8, -8]
+                    self.ball_vel = pygame.Vector2(8, -8)
                 else:
-                    self.ball_vel = [7, -7]
+                    self.ball_vel = pygame.Vector2(7, -7)
                 self.state = self.ball_play
             elif keys[pygame.K_n] and (self.state == self.ball_game_over or self.state == self.ball_won):
                 restart_game()
@@ -179,22 +179,22 @@ class TestGame:
             x_max_ball   = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball   = (screen.get_height() -10) - b_diameter
 
-            self.ball.left += self.ball_vel[0]
-            self.ball.top  += self.ball_vel[1]
+            self.ball.left += self.ball_vel.x
+            self.ball.top  += self.ball_vel.y
 
             if self.ball.left <= 0:
                 self.ball.left = 0
-                self.ball_vel[0] = -self.ball_vel[0]
+                self.ball_vel.x = -self.ball_vel.x
             elif self.ball.left >= x_max_ball:
                 self.ball.left = x_max_ball
-                self.ball_vel[0] = -self.ball_vel[0]
+                self.ball_vel.x = -self.ball_vel.x
             
             if self.ball.top < 0:
                 self.ball.top = 0
-                self.ball_vel[1] = -self.ball_vel[1]
+                self.ball_vel.y = -self.ball_vel.y
             elif self.ball.top >= y_max_ball:            
                 self.ball.top = y_max_ball
-                self.ball_vel[1] = -self.ball_vel[1]
+                self.ball_vel.y = -self.ball_vel.y
 
         def handle_collisions():
             screen = pygame.display.get_surface()
@@ -218,9 +218,10 @@ class TestGame:
                     db = abs(self.ball.bottom - brick.top)
                     dt = abs(self.ball.top - brick.bottom)
                     if min(dl, dr) < min(dt, db):
-                        self.ball_vel[0] = -self.ball_vel[0]
+                        self.ball_vel.x = -self.ball_vel.x
                     else:
-                        self.ball_vel[1] = -self.ball_vel[1]
+                        self.ball_vel.y = -self.ball_vel.y
+                    self.ball_vel.rotate_ip(random() * 10 - 5)
                     break
 
             if len(self.bricks_arr) == 0:
@@ -228,7 +229,8 @@ class TestGame:
                 
             if self.ball.colliderect(self.paddle):
                 self.ball.top = y_scrol - b_diameter
-                self.ball_vel[1] = -self.ball_vel[1]
+                self.ball_vel.y = -self.ball_vel.y
+                self.ball_vel.rotate_ip(random() * 10 - 5)
             elif self.ball.top > self.paddle.top:
                 self.lives -= 1
                 if self.lives > 0:
