@@ -1,3 +1,11 @@
+v3
+
+* Add shake effect when ball hits a brick.
+* Better collision handling.
+* Add randomness to velocity after each collision.
+* Center text elements and enable anti-aliasing.
+* Make code compact and consistent.
+
 v2
 
 * Increase the speed of scroller to match that of the ball (Jui Pradhan),
