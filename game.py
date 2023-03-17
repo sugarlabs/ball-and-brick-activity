@@ -408,7 +408,7 @@ class BallAndBrick:
                             quit()
 
                         elif event.key == pygame.K_n:
-                            TestGame().run()
+                            gameLoop()
 
         def settings():
             screen = pygame.display.get_surface()
@@ -454,7 +454,7 @@ class BallAndBrick:
                         quit()
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_p:
-                            TestGame().run()
+                            gameLoop()
                         elif event.key == pygame.K_q:
                             pygame.quit()
                             quit()
