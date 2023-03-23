@@ -408,7 +408,7 @@ class BallAndBrick:
                             quit()
 
                         elif event.key == pygame.K_n:
-                            TestGame().run()
+                            gameLoop()
 
         def settings():
             screen = pygame.display.get_surface()
@@ -423,7 +423,7 @@ class BallAndBrick:
             y_max_ball = (screen.get_height() - 10) - b_diameter
             screen.fill(self.yellow)
             message_to_screen("Settings", self.black, -400, size="large")
-            message_to_screen("Press P to continue", self.black, -300, size="medium")
+            message_to_screen("Press N to start a new game", self.black, -300, size="medium")
             message_to_screen("Press Q to quit", self.black, -230, size="medium")
             message_to_screen("Themes: ", self.black, -150, size="medium")
             message_to_screen("1. Classic ", self.black, -80, size="small")
@@ -453,8 +453,8 @@ class BallAndBrick:
                         pygame.quit()
                         quit()
                     if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_p:
-                            TestGame().run()
+                        if event.key == pygame.K_n:
+                            gameLoop()
                         elif event.key == pygame.K_q:
                             pygame.quit()
                             quit()
