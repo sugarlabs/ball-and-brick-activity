@@ -50,6 +50,13 @@ class BallAndBrickActivity(sugar3.activity.activity.Activity):
         activity_button = ActivityToolbarButton(self)
         toolbar_box.toolbar.insert(activity_button, -1)
         activity_button.show()
+        
+        # Add Pause button to the toolbar
+        pause_button = ToolButton('media-playback-pause')
+        pause_button.set_tooltip(_('Pause game'))
+        pause_button.connect('clicked', self.toggle_pause)
+        toolbar_box.toolbar.insert(pause_button, -1)
+        pause_button.show()
 
         # Blank space (separator) and Stop button at the end:
 
@@ -62,7 +69,16 @@ class BallAndBrickActivity(sugar3.activity.activity.Activity):
         stop_button = StopButton(self)
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
-
+        
+        
+    def toggle_pause(self, button):
+        self.paused = not self.paused
+        if self.paused:
+            pygame.mixer.pause()  # Pause any playing sounds
+            self._pygamecanvas.pause()
+        else:
+            pygame.mixer.unpause()  # Resume any paused sounds
+            self._pygamecanvas.unpause()
     def read_file(self, file_path):
         self.game.read_file(file_path)
 
