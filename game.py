@@ -105,15 +105,10 @@ class BallAndBrick:
             pygame.mixer.music.load("assets/jazz.ogg")
             pygame.mixer.music.play(-1)
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
             scroller_h = round((screen.get_height()) / 40)
             b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             self.lives = 3
             self.score = 0
@@ -141,13 +136,6 @@ class BallAndBrick:
             screen = pygame.display.get_surface()
             brick_w = round((screen.get_width()) / 10.7)
             brick_h = round((screen.get_height()) / 32)
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             brick_start_pos_y = 70
             self.bricks_arr = []
@@ -164,15 +152,7 @@ class BallAndBrick:
 
         def draw_bricks():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             if self.shake > pygame.time.get_ticks():
                 rand = (random() - 0.5) * 6, (random() - 0.5) * 6
@@ -188,15 +168,8 @@ class BallAndBrick:
 
         def check_input():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
             x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
             while Gtk.events_pending():
                 Gtk.main_iteration()
             keys = pygame.key.get_pressed()
@@ -231,13 +204,9 @@ class BallAndBrick:
 
         def move_ball():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
             scroller_h = round((screen.get_height()) / 40)
             b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
             x_max_ball = (screen.get_width() - sx(10)) - b_diameter
             y_max_ball = (screen.get_height() - 10) - b_diameter
 
@@ -260,15 +229,10 @@ class BallAndBrick:
 
         def handle_collisions():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
             scroller_h = round((screen.get_height()) / 40)
             b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
             y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             for brick in self.bricks_arr:
                 if self.ball.colliderect(brick):
@@ -302,15 +266,7 @@ class BallAndBrick:
 
         def score_lives():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
+            
             medfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(30)))
             font_surface = medfont.render(
                 "Score: " + str(self.score), True, self.brick_col
@@ -330,17 +286,6 @@ class BallAndBrick:
             )
 
         def text_size(text, color, size):
-            screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
-
             smallfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(30)))
             medfont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(40)))
             largefont = pygame.font.Font("fonts/comicsansms.ttf", int(sx(70)))
@@ -356,15 +301,6 @@ class BallAndBrick:
         def message_to_screen(msg, color, y_displace=100, size="small"):
             screen = pygame.display.get_surface()
             scale = screen.get_height() / 900
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             textSur, textRect = text_size(msg, color, size)
             textRect.center = ((screen.get_width()) / 2), (
@@ -412,15 +348,6 @@ class BallAndBrick:
 
         def settings():
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
             screen.fill(self.yellow)
             message_to_screen("Settings", self.black, -400, size="large")
             message_to_screen("Press N to start a new game", self.black, -300, size="medium")
@@ -468,17 +395,9 @@ class BallAndBrick:
                                     break
 
         def gameLoop():
-
             screen = pygame.display.get_surface()
-            brick_w = round((screen.get_width()) / 10.7)
-            brick_h = round((screen.get_height()) / 32)
             scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
             b_diameter = round((scroller_w) / 3.75)
-            x_max_scrol = screen.get_width() - scroller_w
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            x_max_ball = (screen.get_width() - sx(10)) - b_diameter
-            y_max_ball = (screen.get_height() - 10) - b_diameter
 
             pygame.display.update()
             restart_game()
