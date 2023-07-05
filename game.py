@@ -101,17 +101,20 @@ class BallAndBrick:
         pass
 
     def run(self):
+        def vw(x):
+            return (x / 100) * pygame.display.get_surface().get_width()
+
+        def vh(y):
+            return (y / 100) * pygame.display.get_surface().get_height()
+
         def restart_game():
             pygame.mixer.music.load("assets/jazz.ogg")
             pygame.mixer.music.play(-1)
-            screen = pygame.display.get_surface()
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
 
+            self.bat = Bat((vw(50), vh(88)), (vw(11.7), vw(2)))
+            
             self.balls = []
             new_ball()
-            self.bat = Bat((screen.get_width() / 2, y_scrol), (scroller_w, scroller_h))
 
             self.lives = 3
             self.score = 0
@@ -120,11 +123,8 @@ class BallAndBrick:
             brick_make()
 
         def new_ball():
-            scroller_w = round((screen.get_width()) / 10.7)
-            scroller_h = round((screen.get_height()) / 40)
-            b_diameter = round((scroller_w) / 3.75)
-            y_scrol = (screen.get_height() - 10) - scroller_h - 70
-            self.balls.append(Ball(((screen.get_width() - b_diameter) / 2, y_scrol - b_diameter), b_diameter / 2))
+            r = vw(1.4)
+            self.balls.append(Ball((vw(50), vh(88) - r - 3), r))
 
         def sx(x):
             screen = pygame.display.get_surface()
