@@ -14,7 +14,10 @@ class Ball:
         self.color = (0, 0, 0)
 
     def set_velocity(self, velocity):
-        self.velocity = velocity
+        self.velocity = pygame.Vector2(velocity[0], velocity[1])
+
+    def set_position(self, position):
+        self.position = pygame.Vector2(position[0], position[1])
 
     def update(self):
         self.position[0] += self.velocity[0]
@@ -25,7 +28,7 @@ class Ball:
         x_min = 0 + bounce_padding
         x_max = self.gameDisplay.get_width() - self.radius * 2 - bounce_padding
         y_min = 0 + bounce_padding
-        y_max = self.gameDisplay.get_height() - self.radius * 2 - bounce_padding
+        y_max = self.gameDisplay.get_height() + self.radius * 4
 
         if self.position[0] <= x_min:
             self.position[0] = x_min
@@ -45,18 +48,27 @@ class Ball:
 
         self.draw()
 
-    def handle_collisions(self, paddle):
-        ball_rect = pygame.Rect(
-            self.position[0],
-            self.position[1],
-            self.radius * 2,
-            self.radius * 2,
-        )
+    def is_lost(self):
+        return self.position.y > self.gameDisplay.get_height()
 
-        if ball_rect.colliderect(paddle):
-            self.position[1] = paddle.y - self.radius * 2
-            self.velocity[1] *= -1
-            self.velocity.rotate_ip(random() * 10 - 5)
+    def bounce_against(self, rect):
+        d = self.radius * 2
+        overlap_x = max(0, min(rect.right, self.position.x + self.velocity.x) - max(rect.left, self.position.x))
+        overlap_y = max(0, min(rect.bottom, self.position.y + self.velocity.y) - max(rect.top, self.position.y))
+
+        if overlap_x < overlap_y:
+            if self.velocity.x > 0:
+                self.position.x = rect.left - d
+            else:
+                self.position.x = rect.right
+            self.velocity.x *= -1
+        else:
+            if self.velocity.y > 0:
+                self.position.y = rect.top - d
+            else:
+                self.position.y = rect.bottom
+            self.velocity.y *= -1
+        self.velocity.rotate_ip(random() * 10 - 5)
 
     def draw(self):
         pygame.draw.circle(
@@ -69,12 +81,12 @@ class Ball:
                     int(self.radius),
                 )
 
-    def check_collision(self, other_x, other_y, other_width, other_height):
-        self_rect = pygame.Rect(self.x, self.y,
-                                self.rect.width,
-                                self.rect.height)
-        other_rect = pygame.Rect(other_x, other_y,
-                                 other_width,
-                                 other_height)
-        if self_rect.colliderect(other_rect):
-            return True
+    def check_collision(self, rect):
+        ball_rect = pygame.Rect(
+            self.position[0],
+            self.position[1],
+            self.radius * 2,
+            self.radius * 2,
+        )
+
+        return ball_rect.colliderect(rect)
