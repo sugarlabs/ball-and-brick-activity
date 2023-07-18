@@ -83,7 +83,7 @@ class Ball:
             else:
                 self.position.y = rect.bottom
             self.velocity.y *= -1
-        self.velocity.rotate_ip(random() * 10 - 5)
+        self.velocity.rotate_ip((random() * 10) - 5)
 
     def draw(self):
         pygame.draw.circle(
