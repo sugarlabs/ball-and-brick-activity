@@ -376,7 +376,6 @@ class BallAndBrick:
                             self.balls.remove(ball)
                     
                     handle_collisions()
-                
                 elif self.state == State.STILL:
                     for ball in self.balls:
                         n_x  = self.bat.rect.left + self.bat.rect.width / 2
@@ -386,7 +385,6 @@ class BallAndBrick:
                     message_to_screen(
                         "Press C to play", self.brick_col, 0, size="large"
                     )
-                
                 elif self.state == State.LOST:
                     message_to_screen("Game Over", self.brick_col, 50, size="large")
                     message_to_screen(
@@ -402,7 +400,6 @@ class BallAndBrick:
                         "Press Q to quit", self.brick_col, 290, size="medium"
                     )
                     pygame.mixer.music.stop()
-                
                 elif self.state == State.WON:
                     message_to_screen("You Won", self.brick_col, 50, size="large")
                     message_to_screen(
