@@ -31,6 +31,7 @@ from gi.repository import Gtk
 
 State = Enum('State', ['STILL', 'PLAY', 'WON', 'LOST'])
 
+
 class BallAndBrick:
     def __init__(self):
         self.green = (34, 139, 34)
