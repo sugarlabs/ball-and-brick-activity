@@ -67,19 +67,19 @@ class Ball:
         return self.position.y > self.gameDisplay.get_height()
 
     def bounce_against(self, rect):
-        d = self.radius * 2
+        diameter = self.radius * 2
         overlap_x = max(0, min(rect.right, self.position.x + self.velocity.x) - max(rect.left, self.position.x))
         overlap_y = max(0, min(rect.bottom, self.position.y + self.velocity.y) - max(rect.top, self.position.y))
 
         if overlap_x < overlap_y:
             if self.velocity.x > 0:
-                self.position.x = rect.left - d
+                self.position.x = rect.left - diameter
             else:
                 self.position.x = rect.right
             self.velocity.x *= -1
         else:
             if self.velocity.y > 0:
-                self.position.y = rect.top - d
+                self.position.y = rect.top - diameter
             else:
                 self.position.y = rect.bottom
             self.velocity.y *= -1
