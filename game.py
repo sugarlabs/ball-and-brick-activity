@@ -29,7 +29,7 @@ from enum import Enum
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-State = Enum('State', ['STILL', 'PLAY', 'WON', 'LOST'])
+STATE = Enum('STATE', ['STILL', 'PLAY', 'WON', 'LOST'])
 
 
 class BallAndBrick:
@@ -119,7 +119,7 @@ class BallAndBrick:
 
             self.lives = 3
             self.score = 0
-            self.state = State.STILL
+            self.state = STATE.STILL
 
             brick_make()
 
@@ -169,7 +169,7 @@ class BallAndBrick:
             if keys[pygame.K_RIGHT]:
                 self.bat.move(1)
 
-            if keys[pygame.K_c] and self.state == State.STILL:
+            if keys[pygame.K_c] and self.state == STATE.STILL:
                 if self.score > 150:
                     vel = (10, -10)
                 elif self.score > 100:
@@ -180,9 +180,9 @@ class BallAndBrick:
                 for ball in self.balls:
                     ball.set_velocity(vel)
 
-                self.state = State.PLAY
+                self.state = STATE.PLAY
             elif keys[pygame.K_n] and (
-                self.state == State.LOST or self.state == State.WON
+                self.state == STATE.LOST or self.state == STATE.WON
             ):
                 restart_game()
             elif keys[pygame.K_s]:
@@ -208,13 +208,13 @@ class BallAndBrick:
                     ball.bounce_against(self.bat.rect)
 
             if len(self.bricks_arr) == 0:
-                self.state = State.WON
+                self.state = STATE.WON
             if len(self.balls) == 0:
                 self.lives -= 1
                 new_ball()
-                self.state = State.STILL
+                self.state = STATE.STILL
             if self.lives == 0:
-                self.state = State.LOST
+                self.state = STATE.LOST
 
 
         def score_lives():
@@ -369,14 +369,14 @@ class BallAndBrick:
                 draw_bricks()
                 score_lives()
                 self.bat.update()
-                if self.state == State.PLAY:
+                if self.state == STATE.PLAY:
                     for ball in self.balls:
                         ball.update()
                         if ball.is_lost():
                             self.balls.remove(ball)
                     
                     handle_collisions()
-                elif self.state == State.STILL:
+                elif self.state == STATE.STILL:
                     for ball in self.balls:
                         n_x  = self.bat.rect.left + self.bat.rect.width / 2
                         n_y = self.bat.rect.top - ball.radius * 2
@@ -385,7 +385,7 @@ class BallAndBrick:
                     message_to_screen(
                         "Press C to play", self.brick_col, 0, size="large"
                     )
-                elif self.state == State.LOST:
+                elif self.state == STATE.LOST:
                     message_to_screen("Game Over", self.brick_col, 50, size="large")
                     message_to_screen(
                         "Press N for New Game", self.brick_col, 150, size="medium"
@@ -400,7 +400,7 @@ class BallAndBrick:
                         "Press Q to quit", self.brick_col, 290, size="medium"
                     )
                     pygame.mixer.music.stop()
-                elif self.state == State.WON:
+                elif self.state == STATE.WON:
                     message_to_screen("You Won", self.brick_col, 50, size="large")
                     message_to_screen(
                         "Press N for New Game", self.brick_col, 150, size="medium"
