@@ -29,7 +29,7 @@ class Brick:
     def update(self):
         self.draw()
 
-    def draw(self, offset = (0, 0)):
+    def draw(self, offset=(0, 0)):
         x, y = self.rect.x, self.rect.y
         self.rect.x += offset [0]
         self.rect.y += offset [1]
