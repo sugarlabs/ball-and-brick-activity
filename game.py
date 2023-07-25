@@ -124,8 +124,8 @@ class BallAndBrick:
             brick_make()
 
         def new_ball():
-            r = vw(1.4)
-            self.balls.append(Ball((vw(50), vh(88) - r - 3), r))
+            radius = vw(1.4)
+            self.balls.append(Ball((vw(50), vh(88) - radius - 3), radius))
 
         def sx(x):
             screen = pygame.display.get_surface()
