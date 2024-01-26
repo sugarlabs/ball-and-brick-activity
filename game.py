@@ -91,6 +91,9 @@ class BallAndBrick:
             (255, 255, 49),
             (212, 219, 178),
         )
+        self.brick_hit_sound  = pygame.mixer.Sound("assets/brickhit.ogg")
+        self.paddle_hit_sound = pygame.mixer.Sound("assets/paddlehit.ogg")
+        self.brick_hit_sound.set_volume(0.8)
 
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
@@ -272,6 +275,7 @@ class BallAndBrick:
 
             for brick in self.bricks_arr:
                 if self.ball.colliderect(brick):
+                    self.brick_hit_sound.play()
                     self.score += 3
                     self.bricks_arr.remove(brick)
                     self.shake = pygame.time.get_ticks() + 200
@@ -290,6 +294,7 @@ class BallAndBrick:
                 self.state = self.ball_won
 
             if self.ball.colliderect(self.paddle):
+                self.paddle_hit_sound.play()
                 self.ball.top = y_scrol - b_diameter
                 self.ball_vel.y = -self.ball_vel.y
                 self.ball_vel.rotate_ip(random() * 10 - 5)
