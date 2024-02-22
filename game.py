@@ -399,9 +399,6 @@ class BallAndBrick:
                 while Gtk.events_pending():
                     Gtk.main_iteration()
                 for event in pygame.event.get():
-                    if event.type == pygame.VIDEORESIZE:
-                        pygame.display.set_mode(event.size, pygame.RESIZABLE)
-
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
@@ -451,9 +448,6 @@ class BallAndBrick:
                 while Gtk.events_pending():
                     Gtk.main_iteration()
                 for event in pygame.event.get():
-                    if event.type == pygame.VIDEORESIZE:
-                        pygame.display.set_mode(event.size, pygame.RESIZABLE)
-
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
@@ -578,9 +572,6 @@ class BallAndBrick:
             while Gtk.events_pending():
                 Gtk.main_iteration()
             for event in pygame.event.get():
-                if event.type == pygame.VIDEORESIZE:
-                    pygame.display.set_mode(event.size, pygame.RESIZABLE)
-
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
