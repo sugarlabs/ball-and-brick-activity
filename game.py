@@ -91,6 +91,8 @@ class BallAndBrick:
             (255, 255, 49),
             (212, 219, 178),
         )
+
+        pygame.mixer.init()
         self.brick_hit_sound  = pygame.mixer.Sound("assets/brickhit.ogg")
         self.paddle_hit_sound = pygame.mixer.Sound("assets/paddlehit.ogg")
         self.brick_hit_sound.set_volume(0.8)
@@ -382,7 +384,7 @@ class BallAndBrick:
             pygame.mixer.music.unpause()
             self.pause = False
 
-        def paused():
+        def draw_pause():
             screen = pygame.display.get_surface()
             screen.fill(self.back_col)
             message_to_screen("Paused", self.brick_col, 0, size="large")
@@ -391,9 +393,11 @@ class BallAndBrick:
                 "Press N for a new game", self.brick_col, 170, size="medium"
             )
             message_to_screen("Press Q to quit", self.brick_col, 240, size="medium")
-            pygame.mixer.music.pause()
             pygame.display.update()
 
+        def paused():
+            draw_pause()
+            pygame.mixer.music.pause()
             self.pause = True
             while self.pause:
                 while Gtk.events_pending():
@@ -401,6 +405,7 @@ class BallAndBrick:
                 for event in pygame.event.get():
                     if event.type == pygame.VIDEORESIZE:
                         pygame.display.set_mode(event.size, pygame.RESIZABLE)
+                        draw_pause()
 
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -415,7 +420,7 @@ class BallAndBrick:
                         elif event.key == pygame.K_n:
                             gameLoop()
 
-        def settings():
+        def draw_settings():
             screen = pygame.display.get_surface()
             brick_w = round((screen.get_width()) / 10.7)
             brick_h = round((screen.get_height()) / 32)
@@ -447,12 +452,16 @@ class BallAndBrick:
                 size="medium",
             )
             pygame.display.update()
+
+        def settings():
+            draw_settings()
             while True:
                 while Gtk.events_pending():
                     Gtk.main_iteration()
                 for event in pygame.event.get():
                     if event.type == pygame.VIDEORESIZE:
                         pygame.display.set_mode(event.size, pygame.RESIZABLE)
+                        draw_settings()
 
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -580,6 +589,7 @@ class BallAndBrick:
             for event in pygame.event.get():
                 if event.type == pygame.VIDEORESIZE:
                     pygame.display.set_mode(event.size, pygame.RESIZABLE)
+                    draw_welcome()
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
