@@ -204,35 +204,47 @@ class BallAndBrick:
             y_max_ball = (screen.get_height() - 10) - b_diameter
             while Gtk.events_pending():
                 Gtk.main_iteration()
-            keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_LEFT]:
+            for event in self.py_events:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        self.keys_pressed[pygame.K_LEFT] = True
+                    if event.key == pygame.K_RIGHT:
+                        self.keys_pressed[pygame.K_RIGHT] = True
+
+                    if event.key == pygame.K_c and self.state == self.ball_still:
+                        if self.score > 150:
+                            self.ball_vel = pygame.Vector2(10, -10)
+                        elif self.score > 100:
+                            self.ball_vel = pygame.Vector2(8, -8)
+                        else:
+                            self.ball_vel = pygame.Vector2(7, -7)
+                        self.state = self.ball_play
+                    elif event.key == pygame.K_n and (
+                        self.state == self.ball_game_over or self.state == self.ball_won
+                    ):
+                        restart_game()
+                    elif event.key == pygame.K_s:
+                        settings()
+                    elif event.key == pygame.K_q:
+                        pygame.quit()
+                        quit()
+
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        self.keys_pressed[pygame.K_LEFT] = False
+                    if event.key == pygame.K_RIGHT:
+                        self.keys_pressed[pygame.K_RIGHT] = False
+
+            if self.keys_pressed[pygame.K_LEFT]:
                 self.paddle.left -= 12
                 if self.paddle.left < 0:
                     self.paddle.left = 0
 
-            if keys[pygame.K_RIGHT]:
+            if self.keys_pressed[pygame.K_RIGHT]:
                 self.paddle.left += 12
                 if self.paddle.left > x_max_scrol:
                     self.paddle.left = x_max_scrol
-
-            if keys[pygame.K_c] and self.state == self.ball_still:
-                if self.score > 150:
-                    self.ball_vel = pygame.Vector2(10, -10)
-                elif self.score > 100:
-                    self.ball_vel = pygame.Vector2(8, -8)
-                else:
-                    self.ball_vel = pygame.Vector2(7, -7)
-                self.state = self.ball_play
-            elif keys[pygame.K_n] and (
-                self.state == self.ball_game_over or self.state == self.ball_won
-            ):
-                restart_game()
-            elif keys[pygame.K_s]:
-                settings()
-            elif keys[pygame.K_q]:
-                pygame.quit()
-                quit()
 
         def move_ball():
             screen = pygame.display.get_surface()
@@ -496,8 +508,13 @@ class BallAndBrick:
 
             pygame.display.update()
             restart_game()
+            self.keys_pressed = {
+                pygame.K_LEFT: False,
+                pygame.K_RIGHT: False
+            }
             while 1:
-                for event in pygame.event.get():
+                self.py_events = pygame.event.get()
+                for event in self.py_events:
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         quit()
