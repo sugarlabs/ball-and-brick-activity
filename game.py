@@ -92,11 +92,6 @@ class BallAndBrick:
             (212, 219, 178),
         )
 
-        pygame.mixer.init()
-        self.brick_hit_sound  = pygame.mixer.Sound("assets/brickhit.ogg")
-        self.paddle_hit_sound = pygame.mixer.Sound("assets/paddlehit.ogg")
-        self.brick_hit_sound.set_volume(0.8)
-
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
         pass
@@ -106,6 +101,10 @@ class BallAndBrick:
         pass
 
     def run(self):
+        self.brick_hit_sound  = pygame.mixer.Sound("assets/brickhit.ogg")
+        self.paddle_hit_sound = pygame.mixer.Sound("assets/paddlehit.ogg")
+        self.brick_hit_sound.set_volume(0.8)
+        
         def restart_game():
             pygame.mixer.music.load("assets/jazz.ogg")
             pygame.mixer.music.play(-1)

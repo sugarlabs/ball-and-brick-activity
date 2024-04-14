@@ -34,7 +34,9 @@ class BallAndBrickActivity(sugar3.activity.activity.Activity):
         # Build the Pygame canvas.
 
         self._pygamecanvas = sugargame.canvas.PygameCanvas(
-            self, main=self.game.run, modules=[pygame.display]
+            self, main=self.game.run, modules=[pygame.display,
+                                               pygame.mixer,
+                                               pygame.font]
         )
 
         # Note that set_canvas implicitly calls read_file when
