@@ -204,8 +204,16 @@ class BallAndBrick:
             while Gtk.events_pending():
                 Gtk.main_iteration()
 
-            for event in self.py_events:
-                if event.type == pygame.KEYDOWN:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_p:
+                        self.pause = True
+                        pause = True
+                        paused()
                     if event.key == pygame.K_LEFT:
                         self.keys_pressed[pygame.K_LEFT] = True
                     if event.key == pygame.K_RIGHT:
@@ -512,17 +520,6 @@ class BallAndBrick:
                 pygame.K_RIGHT: False
             }
             while 1:
-                self.py_events = pygame.event.get()
-                for event in self.py_events:
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_p:
-                            self.pause = True
-                            pause = True
-                            paused()
-
                 self.clock.tick(50)
                 screen.fill(self.back_col)
                 check_input()
