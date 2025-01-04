@@ -9,7 +9,7 @@ Ball and Brick is not part of the Sugar desktop, but can be added.  Please refer
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/),
-* [Download Ball and Brick](https://activities.sugarlabs.org/en-US/sugar/addon/4798).
+* [Download Ball and Brick](https://v4.activities.sugarlabs.org/app/org.sugarlabs.BallAndBrick.html).
 
 Reporting Bugs
 --------------
