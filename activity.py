@@ -15,7 +15,7 @@ import game
 
 class BallAndBrickActivity(Activity):
     def __init__(self, handle):
-        Activity.__init__(handle)
+        Activity.__init__(self, handle)
 
         self.paused = False
 
