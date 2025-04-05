@@ -297,7 +297,7 @@ class BallAndBrick:
             for brick in self.bricks_arr:
                 if self.ball.colliderect(brick):
                     self.brick_hit_sound.play()
-                    self.score += 3
+                    self.score += 1
                     self.bricks_arr.remove(brick)
                     self.shake = pygame.time.get_ticks() + 200
                     dr = abs(self.ball.right - brick.left)
