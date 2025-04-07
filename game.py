@@ -21,6 +21,7 @@
 from random import random
 import pygame
 import gi
+import json
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -28,6 +29,7 @@ from gi.repository import Gtk
 
 class BallAndBrick:
     def __init__(self):
+        self.theme_index = 0
         self.green = (34, 139, 34)
         self.red = (255, 0, 0)
         self.yellow = (255, 255, 153)
@@ -93,11 +95,34 @@ class BallAndBrick:
 
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
-        pass
-
+        state = {
+            "back_col": list(self.back_col),
+            "brick_col": list(self.brick_col),
+            "scroll_col": list(self.scroll_col),
+            "theme_index": self.theme_index
+        }
+        try:
+            with open(file_path, "w") as f:
+                json.dump(state, f)
+        except Exception as e:
+            print("Error saving state:", e)
+            
     # Called to load the state of the game from the Journal.
     def read_file(self, file_path):
-        pass
+        try:
+            with open(file_path, "r") as f:
+                state = json.load(f)
+            if "theme_index" in state:
+                self.theme_index = state["theme_index"]
+                self.back_col = self.back_cols[self.theme_index]
+                self.brick_col = self.brick_cols[self.theme_index]
+                self.scroll_col = self.scroll_cols[self.theme_index]
+            else:
+                self.back_col = tuple(state.get("back_col", self.back_col))
+                self.brick_col = tuple(state.get("brick_col", self.brick_col))
+                self.scroll_col = tuple(state.get("scroll_col", self.scroll_col))
+        except Exception as e:
+             print("Error loading state:", e)
 
     def run(self):
         self.brick_hit_sound = pygame.mixer.Sound("assets/brickhit.ogg")
@@ -431,6 +456,7 @@ class BallAndBrick:
                         else:
                             for i, key in enumerate(self.theme_keys):
                                 if event.key == key:
+                                    self.theme_index = i
                                     self.back_col = self.back_cols[i]
                                     self.brick_col = self.brick_cols[i]
                                     self.scroll_col = self.scroll_cols[i]
