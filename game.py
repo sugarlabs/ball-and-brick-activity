@@ -22,6 +22,7 @@ from random import random
 import sys
 import pygame
 import gi
+import json
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -39,6 +40,7 @@ class BallAndBrick:
         self.back_col = (255, 255, 255)
         self.brick_col = (0, 0, 0)
         self.scroll_col = (0, 0, 0)
+        self.high_score = 0
         self.ball_still = 0
         self.ball_play = 1
         self.ball_won = 2
@@ -94,11 +96,30 @@ class BallAndBrick:
 
     # Called to save the state of the game to the Journal.
     def write_file(self, file_path):
-        pass
+        state = {
+            "back_col": list(self.back_col),
+            "brick_col": list(self.brick_col),
+            "scroll_col": list(self.scroll_col),
+            "high_score": self.high_score
+        }
+        try:
+            with open(file_path, "w") as f:
+                json.dump(state, f)
+        except Exception as e:
+            print("Error saving state:", e)
+
 
     # Called to load the state of the game from the Journal.
     def read_file(self, file_path):
-        pass
+        try:
+            with open(file_path, "r") as f:
+                state = json.load(f)
+            self.back_col = tuple(state.get("back_col", self.back_col))
+            self.brick_col = tuple(state.get("brick_col", self.brick_col))
+            self.scroll_col = tuple(state.get("scroll_col", self.scroll_col))
+            self.high_score = state.get("high_score", self.high_score)
+        except Exception as e:
+             print("Error loading state:", e)
 
     def run(self):
         self.brick_hit_sound  = pygame.mixer.Sound("assets/brickhit.ogg")
@@ -297,7 +318,9 @@ class BallAndBrick:
             for brick in self.bricks_arr:
                 if self.ball.colliderect(brick):
                     self.brick_hit_sound.play()
-                    self.score += 3
+                    self.score += 1
+                    if self.score > self.high_score:
+                        self.high_score = self.score
                     self.bricks_arr.remove(brick)
                     self.shake = pygame.time.get_ticks() + 200
                     dr = abs(self.ball.right - brick.left)
@@ -349,11 +372,11 @@ class BallAndBrick:
                 live_surface,
                 (round(screen.get_width() / 2 - live_surface.get_width() / 2), 5),
             )
-            pause_mess = medfont.render("Press P to pause", True, self.brick_col)
-            screen.blit(
-                pause_mess,
-                (round(screen.get_width() - pause_mess.get_width() - sx(100)), 5),
+             high_score_surface = medfont.render(
+               "High Score: " + str(self.high_score), True, self.brick_col
             )
+            screen.blit(high_score_surface, (screen.get_width() - high_score_surface.get_width() - sx(100), 5))
+
 
         def text_size(text, color, size):
             screen = pygame.display.get_surface()
